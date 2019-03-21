@@ -1,0 +1,45 @@
+== Task 2 - Authorization Code Flow
+
+For this task, we use another process to obtain the access and id token:
+https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth[Authorization Code Flow].
+
+We use the same authorization server, but to init the flow we use a different endpoint:
+
+Authorization Server endpoint:
+
+ https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/login
+
+However you have to use a different set of parameters:
+
+.Query Parameters
+|===
+
+|`client_id` | `5vkkniseds4i1s4pst0uoe280u`
+
+|`redirect_uri` | one of `http://localhost:8080/callback, http://localhost/callback, https://devjourfix.willhaben.test/callback`
+
+|`scope` | ? + `devjourfix.willhaben.test/devjourfix`
+
+|`response_type` | ? |
+
+|===
+
+Fill in the missing query parameters (?) required by the https://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint[OIDC standard]
+and fire a HTTP GET.
+
+
+Once you logged in, the server redirects you with a `code` query parameter.
+This `code` can be exchanged for an id and access token using
+the https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint[OIDC token endpoint]:
+
+ https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token
+
+More specific information about the endpoint can be found in
+the https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html[authorization servers documentation].
+
+To exchange the code for a token, you must now the `client_id` and also the
+`client_secret` which is `1r1lkqea5tuh4scm7lkd42mcl32pgrbpkim5gvsp6bvgne7e55f7`.
+
+
+Using the `access_token` this time, fire a HTTP GET to
+ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2

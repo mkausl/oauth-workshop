@@ -1,0 +1,28 @@
+= Devjourfix special
+
+Welcome to the willhaben devjourfix OAuth/OIDC special.
+
+This tutorial should help you to learn more about authentication with the OIDC and OAuth 2 standards.
+
+It is a "scavenger hunt" style coding challenge, where you have to complete a series
+of tasks until you finally arrive at the solution.
+
+Each task depends on the previous one, so you have to solve it in order.
+
+The goal ist to access the following REST API resources (in that order), which is only
+possible using the proper tokens which you will learn about in this tutorial.
+
+. `https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task0`
+. `https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task1`
+. `https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2`
+. `https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task3`
+
+The first one who accesses the last resource and shouts out loud the provided "keyword" will
+be the winner of this game.
+
+You dont need special preparations, however you should be able to make arbitrary HTTP calls
+using a client of your choice.
+
+To start the scavenger hunt, access the first resource in your browser.
+
+Good luck!

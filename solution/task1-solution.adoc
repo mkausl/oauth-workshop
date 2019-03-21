@@ -1,0 +1,12 @@
+== Task 2 - solution
+
+
+https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/login?response_type=code&redirect_uri=http://localhost:8080/callback&scope=openid+devjourfix.willhaben.test/devjourfix+devjourfix.willhaben.test/final&client_id=5vkkniseds4i1s4pst0uoe280u
+
+http://localhost:8080/callback?code=ad81f2e6-fbcf-48b1-a759-5eb7b630c2e1
+
+POST https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic NXZra25pc2VkczRpMXM0cHN0MHVvZTI4MHU6MXIxbGtxZWE1dHVoNHNjbTdsa2Q0Mm1jbDMycGdyYnBraW01Z3ZzcDZidmduZTdlNTVmNw==
+
+code=ad81f2e6-fbcf-48b1-a759-5eb7b630c2e1&grant_type=authorization_code&client_id=5vkkniseds4i1s4pst0uoe280u&redirect_uri=http://localhost:8080/callback

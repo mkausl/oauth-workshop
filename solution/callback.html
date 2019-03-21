@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Devjourfix Special</title>
+
+</head>
+<body>
+
+<h2>task 1</h2>
+<a href="https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/authorize?response_type=token&redirect_uri=http://localhost:8080/callback.html&scope=openid+devjourfix.willhaben.test/bazinga&client_id=3can53th3tlmsnhcn1buji30i8">
+    Login1
+</a>
+<p>id_token</p>
+<pre id="task1"></pre>
+<p>access_token</p>
+<pre id="task1a"></pre>
+<script>
+
+    var hash = window.location.hash.substr(1);
+
+    var result = hash.split('&').reduce(function (result, item) {
+        var parts = item.split('=');
+        result[parts[0]] = parts[1];
+        return result;
+    }, {});
+    window.document.getElementById('task1').innerText = result.id_token
+    window.document.getElementById('task1a').innerText = result.access_token
+
+    fetch('https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task1', {
+        headers: {
+            'Authorization': 'Bearer ' + result.id_token
+        }
+    });
+
+</script>
+
+<h2>task 2</h2>
+<a href="https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/login?response_type=code&redirect_uri=http://localhost:8080/callback&scope=openid+devjourfix.willhaben.test/devjourfix+devjourfix.willhaben.test/final&client_id=5vkkniseds4i1s4pst0uoe280u">
+    Login2
+</a>
+
+
+<p>access_token</p>
+<pre id="task2"></pre>
+<script>
+    let code = new URLSearchParams(window.location.search).get('code')
+
+    fetch('https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token', {
+        body: 'code=' + code + '&grant_type=authorization_code&client_id=5vkkniseds4i1s4pst0uoe280u&redirect_uri=http://localhost:8080/callback',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic NXZra25pc2VkczRpMXM0cHN0MHVvZTI4MHU6MXIxbGtxZWE1dHVoNHNjbTdsa2Q0Mm1jbDMycGdyYnBraW01Z3ZzcDZidmduZTdlNTVmNw=='
+        },
+        method: 'post',
+    }).then(response => response.json())
+        .then(result => {
+            window.document.getElementById('task2').innerText = result.access_token
+            fetch('https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2', {
+                headers: {
+                    'Authorization': 'Bearer ' + result.access_token
+                }
+            });
+        })
+
+
+</script>
+
+<h2>task 3</h2>
+
+
+<p>access_token</p>
+<pre id="task3"></pre>
+<pre id="task3-text"></pre>
+<script>
+
+    fetch('https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token', {
+        body: 'grant_type=refresh_token&client_id=5vkkniseds4i1s4pst0uoe280u&refresh_token=eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.FNsnsT2KGeEuJzmevGlp-BJdgnFby9XAgTI9qIMf9x1f9iJ2jidx6dpKPD0g9c0m6UWCW6RS3aDzI3hVzvM9is3C_zVFzVglaZFFYgH5XgwgiFavyQ1RGKZQ8e0nOaY9uunLwdaWgiBJ7hFhtt-z1GdEJ-6Vj_4Krp15frlQdqJfXZ5YtTEaYO0m4Uujo5B_XINTfZDoPOz2hiJYYR3bDf99ovAeSA8iRfB2E14Pvj1T-sl2TUJiuqtaQgaMBAuiZ-YJUGjzbCcD9W_wH-YNPbzKjC_aQR4_K9mH-XJVskt0150QXTTkkDuBSucr9ja9EUXGi3c8ZQdkeAAmPkRDLA.wEi5KmRjEHe1_0ap.xY1kb1Cl5Nh89QtHSXujIhGYSrPbUGED-9Wa7sG2ItIWMiqrJ9xqeZyfVOw0ioeaKP43I521GJ_vk8WLGdX8v9KvZHKejiNe2ZqGJKniNqf_-TmVgeLU9qGPIFZUYoIM34fF4jCZz5TuH8q-fThcMCJ6nGk4doAQSSLYQG9uqadlxGV20HHLV_DvU1jnQC5uzV8P2rJ092uv3ZKLXwm1Z34XRlLc406y5W-11iKenBgyiTIgXNXTDeMUISfSczDXJ362a7G2fc9xrNmJlOc8tp0rDvCAJLchKK_9mo7g7Ax41lGZX_Y5OeYxPXjySV8q-bsaW7EfP1mQaUdeb8Fn9xK5JH9NB0cpDzjkvklpnhzjhmdw1VN0J39eR4gXWRIFZK05rrQEeXWb93RhKFF-JKRDz8Eu5PnPNxtVEenOiO9_HIlOk1er-1hH_MhJkiPnX1xo4T5bdMsFAiEpOeM3t4x1dfyajAQlDUJ6pUsvBY-BKoEN4-16hCGL91KaXOpv1ofaTx0Jr3PUYtIYtn4IJh0B63h6ODEiosCGWyJEjSxKrkU-15mCc4GnMld7AyqeiiIcqXiHUBwRmjyzyrbFIH7OAIJ5FIp2uUP1T3Il_rOpnlxosE-YCWTmHNJTdlTUMpQSthPdqZSHAJYIpGlplSxsaZUl88NUs6T2bZNhokpp2prGLYElckail6riEibjWJc2UXiLpZUAv2n9sC4w5a_sPKBJS1pbFtQInGa61UCqN-BXBxJLkeeNFhycgixcpYUJgJ8XPzM0l5mEi7TfITC4S-c37d5TDWC4MCuazLH_G_e-EW4AOqFU9PkQg9_CFTX0rLPXQ-j6rMJdTe6zSokwPvp_bKyJxS7xt-gQiODmcoeaAs-0L3mMMdseTKenHdTRJKieKrwSP_2-qq6iUUQC5_Cv8jTwxH6ty_ob4IybZqHM9aer87-TlTHbnKPk9rTXRf0O-CtfytKMiedTwSjVndJGyY1RyvjdeiviLCRdVm9is9PzvKVvhFb4hWfI_bNSo-4diWgJxQKTEdyFTbS3WfYJlc9FwXG4WqzVL-WCle95tXQF73uwITGkPcbRY6Du9gK3bqudNoF4GIqrdP1Hd_3-RRIo5dvJLd2jfXEoBoUqRU_4lP4ceDLGOGQA2qC3ggj1iQW4Gl6FcG5sFvmGl7SmMPaG00Z7ji2D3ffZDl9tqN77wvRaYkjIUZhOUEPsc1gZH3D6EMtVLRoop4sHED2U603DoUv_4cHiEe1eitiCl4AN8CUDK_m-gFWTyNlsVwTdzBQ7b_8iB1tMCgMNlW__zfHyfw.t62tdaloxy0BRzhzlG1law',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic NXZra25pc2VkczRpMXM0cHN0MHVvZTI4MHU6MXIxbGtxZWE1dHVoNHNjbTdsa2Q0Mm1jbDMycGdyYnBraW01Z3ZzcDZidmduZTdlNTVmNw=='
+        },
+        method: 'post',
+    })
+        .then(response => response.json())
+        .then(result => {
+            window.document.getElementById('task3').innerText = result.access_token
+           fetch('https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task3', {
+                headers: {
+                    'Authorization': 'Bearer ' + result.access_token
+                }
+            });
+
+        })
+
+
+</script>
+
+</body>
+
+</html>
