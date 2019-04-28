@@ -1,0 +1,71 @@
+# OAuth 2.0 workshop
+
+## Agenda
+
+* Very brief introduction to OAuth/OpenID connect
+* Coding challenge
+
+## What is OAuth 2.0?
+
+OAuth 2.0 is a "authorization framework"
+
+It defines how *client* applications can obtain *authorization* from a *user* to access a *resource* on her behalf
+
+## Example
+
+Your web application can access a users google calendar if the user consents.
+
+https://accounts.google.com/o/oauth2/v2/auth?client_id=879595478666-2h52gee0bmboius1eti2vo0aq9qq3dp5.apps.googleusercontent.com&redirect_uri=http://localhost&response_type=token&scope=https://www.googleapis.com/auth/calendar.readonly[Login]
+
+## Grant types
+
+The steps needed to get the access token are defined in so called *grant types*.
+
+In the workshop we will look at two grant types:
+
+* Authorization Code
+* Implicit
+
+## Authorization Code Grant
+
+     +----------+
+     | Resource |
+     |   Owner  |
+     +----------+
+          ^
+         (B)
+     +----|-----+          Client Identifier      +---------------+
+     |         -+----(A)-- & Redirection URI ---->|               |
+     |  User-   |                                 | Authorization |
+     |  Agent  -+----(B)-- User authenticates --->|     Server    |
+     |          |                                 |               |
+     |         -+----(C)-- Authorization Code ---<|               |
+     +-|----|---+                                 +---------------+
+      (A)  (C)                                        |      |
+       ^    v                                         |      |
+     +---------+                                      |      |
+     |         |>---(D)-- Authorization Code ---------'      |
+     |  Client |          & Redirection URI                  |
+     |         |<---(E)----- Access Token -------------------'
+     +---------+       (w/ Optional Refresh Token)
+
+## Implicit Grant
+
+     
+ +----------+     +----------+          Client Identifier     +---------------+
+ | Resource |--B->|         -+----(A)-- & Redirection URI --->|               |
+ |  Owner   |     |  User-   |                                | Authorization |
+ |          |     |  Agent  -|----(B)-- User authenticates -->|     Server    |
+ +----------+     |          |                                |               |
+                  |          |<---(C)--- Redirection URI ----<|               |
+                  |          |          with Access Token     +---------------+
+                  |          |            in Fragment
+                  |          |                                +---------------+
+                  |          |----(D)--- Redirection URI ---->|   Web-Hosted  |
+  +---------+     |          |          without Fragment      |     Client    |
+  |         |--A->|          |                                |    Resource   |
+  |  Client |     |     (F)  |<---(E)------- Script ---------<|               |
+  |         |<-G--|          |                                +---------------+
+  +---------+     +----------+
+     (G) Access Token
+     
