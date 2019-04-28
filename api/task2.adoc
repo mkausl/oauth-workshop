@@ -42,4 +42,4 @@ To exchange the code for a token, you must now the `client_id` and also the
 
 
 Using the `access_token` this time, fire a HTTP GET to
- https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2
+ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task3

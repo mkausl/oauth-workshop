@@ -1,28 +1,12 @@
-= Devjourfix special
+= OAuth 2.0 workshop
 
-Welcome to the willhaben devjourfix OAuth/OIDC special.
+This repo contains tasks for the willhaben OAuth 2.0 workshop.
 
-This tutorial should help you to learn more about authentication with the OIDC and OAuth 2 standards.
+The files in `api` contain the tasks for the participants. Files in this directory are mapped to an aws api gateway endpoint (`https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod`). `task0.adoc` maps to the root resource, the other tasks map to their respective file name minus `.adoc`. 
 
-It is a "scavenger hunt" style coding challenge, where you have to complete a series
-of tasks until you finally arrive at the solution.
+Participants have to obtain various tokens from an authorization server (aws cognito) to complete the workshop. 
 
-Each task depends on the previous one, so you have to solve it in order.
+To access task 1 you dont need any tokens.
 
-The goal ist to access the following REST API resources (in that order), which is only
-possible using the proper tokens which you will learn about in this tutorial.
+To access task 2, participants need a valid token from task 1, and so on until they reach task4. When solved, task 4 povides a "keyword" which completes the challenge.
 
-. `https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task0`
-. `https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task1`
-. `https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2`
-. `https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task3`
-
-The first one who accesses the last resource and shouts out loud the provided "keyword" will
-be the winner of this game.
-
-You dont need special preparations, however you should be able to make arbitrary HTTP calls
-using a client of your choice.
-
-To start the scavenger hunt, access the first resource in your browser.
-
-Good luck!

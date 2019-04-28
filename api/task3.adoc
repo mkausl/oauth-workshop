@@ -1,7 +1,7 @@
 == Task 3 - Refresh token
 
-For the final challenge you need to obtain an access token
-for a user that has already logged in.
+For this challenge you need to obtain an access token
+by exchanging a *refresh token*.
 
 The user has already logged in previously to your application using
 the *Authorization Code Flow of task 2*.
@@ -19,7 +19,7 @@ In your application you find the following entry for the user:
 _Hint_: The access_token probably has already expired, you need to https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html[obtain a new one]!
 
 
-Fire a HTTP GET to this endpoint and get the hint for the solution
+Fire a HTTP GET to the final endpoint: 
 
- https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task3
+ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task4
 

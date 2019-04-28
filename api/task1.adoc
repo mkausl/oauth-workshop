@@ -38,4 +38,4 @@ Both tokens should validate with one of the https://cognito-idp.eu-central-1.ama
 
 Use the `id_token` to make a call agains this OIDC protected resource to get your next assignment:
 
- https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task1
+ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2
