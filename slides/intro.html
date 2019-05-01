@@ -13,13 +13,18 @@ b.conum *{color:inherit!important}
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = window.location.search.match( /print-pdf/gi ) ? "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/css/print/pdf.css" : "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/css/print/paper.css";
-document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/html5shiv.js"></script><![endif]--></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>OAuth 2.0 workshop</h1></section><section id="_agenda"><h2>Agenda</h2><div class="ulist"><ul><li><p>Very brief introduction to OAuth/OpenID connect</p></li><li><p>Coding challenge</p></li></ul></div></section>
-<section id="_what_is_oauth_2_0"><h2>What is OAuth 2.0?</h2><div class="paragraph"><p>OAuth 2.0 is a "authorization framework"</p></div>
-<div class="paragraph"><p>It defines how <strong>client</strong> applications can obtain <strong>authorization</strong> from a <strong>user</strong> to access a <strong>resource</strong> on her behalf</p></div></section>
-<section id="_example"><h2>Example</h2><div class="paragraph"><p>Your web application can access a users google calendar if the user consents.</p></div>
-<div class="paragraph"><p><a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=879595478666-2h52gee0bmboius1eti2vo0aq9qq3dp5.apps.googleusercontent.com&amp;redirect_uri=http://localhost&amp;response_type=token&amp;scope=https://www.googleapis.com/auth/calendar.readonly">Login</a></p></div></section>
+document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/html5shiv.js"></script><![endif]--><link rel="stylesheet" href="custom.css"></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>OAuth 2.0 workshop</h1></section><section id="_agenda"><h2>Agenda</h2><div class="ulist"><ul><li><p>Very brief introduction to OAuth/OpenID connect</p></li><li><p>Coding challenge</p></li></ul></div></section>
+<section id="_what_is_oauth_2_0"><h2>What is OAuth 2.0?</h2><div class="paragraph"><p>OAuth 2.0 is a <strong>authorization framework</strong></p></div></section>
+<section id="_what_is_oauth_2_0_2"><h2>What is OAuth 2.0?</h2><div class="paragraph"><p>It defines how a <strong>client</strong> application can<br>
+obtain <strong>authorization</strong> from a <strong>user</strong><br>
+to access a <strong>resource</strong> on her behalf</p></div></section>
+<section id="_vocabulary"><h2>Vocabulary</h2><table class="tableblock frame-all grid-all" style="width:100%"><colgroup><col style="width:14.2857%"><col style="width:85.7143%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>client</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">application (e.g. java web applicaiton, angular spa, this slide deck, &#8230;&#8203;)</p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resource</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">something only the user has access to (e.g. REST API accessing your google calendar)</p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>authorization</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">something that proves that you are allowed to access a resource (e.g. Bearer token)</p></td></tr></table></section>
+<section id="_example"><h2>Example</h2><div class="paragraph"><p>Imagine <strong>this slide deck</strong> (the client)<br>
+wants to <strong>access</strong> (obtain authorization)<br>
+<strong>my google calendar</strong> (resource).</p></div>
+<div class="paragraph fragment"><p><a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=1010832371207-6lg7vjf685teluei2aalmmudsm7a0m5j.apps.googleusercontent.com&amp;redirect_uri=http://localhost&amp;response_type=token&amp;scope=https://www.googleapis.com/auth/calendar.readonly">Login</a></p></div></section>
 <section id="_grant_types"><h2>Grant types</h2><div class="paragraph"><p>The steps needed to get the access token are defined in so called <strong>grant types</strong>.</p></div>
-<div class="paragraph"><p>In the workshop we will look at two grant types:</p></div>
+<div class="paragraph"><p>In this workshop we will look at two grant types:</p></div>
 <div class="ulist"><ul><li><p>Authorization Code</p></li><li><p>Implicit</p></li></ul></div></section>
 <section id="_authorization_code_grant"><h2>Authorization Code Grant</h2><div class="literalblock"><div class="content"><pre>+----------+
 | Resource |
@@ -56,7 +61,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if 
  |  Client |     |     (F)  |&lt;---(E)------- Script ---------&lt;|               |
  |         |&lt;-G--|          |                                +---------------+
  +---------+     +----------+
-    (G) Access Token</pre></div></div></section></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/head.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+    (G) Access Token</pre></div></div></section>
+<section id="_lets_start_coding"><h2>Lets start coding</h2><div class="paragraph"><p>You need</p></div>
+<div class="ulist"><ul><li><p>your laptop (any editor, IDE, &#8230;&#8203;)</p></li><li><p>internet access + a browser</p></li><li><p>a tool for making HTTP requests (curl, postman, &#8230;&#8203;)</p></li><li><p>a local webserver serving from port 8080 (<code><a href="http://locahost:8080" class="bare">http://locahost:8080</a></code>)</p></li></ul></div></section>
+<section id="_lets_start_coding_2"><h2>Lets start coding</h2><div class="paragraph"><p>to start access the following URL in your browser:</p></div>
+<div class="paragraph"><p><a href="https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod" class="bare">https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod</a></p></div></section></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/head.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;

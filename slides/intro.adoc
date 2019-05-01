@@ -1,3 +1,5 @@
+:customcss: custom.css
+
 # OAuth 2.0 workshop
 
 ## Agenda
@@ -7,21 +9,37 @@
 
 ## What is OAuth 2.0?
 
-OAuth 2.0 is a "authorization framework"
+OAuth 2.0 is a *authorization framework*
 
-It defines how *client* applications can obtain *authorization* from a *user* to access a *resource* on her behalf
+## What is OAuth 2.0?
+
+It defines how a *client* application can + 
+obtain *authorization* from a *user* + 
+to access a *resource* on her behalf
+
+## Vocabulary
+[cols="1,6"]
+|===
+| *client* | application (e.g. java web applicaiton, angular spa, this slide deck, ...)
+| *resource* | something only the user has access to (e.g. REST API accessing your google calendar)
+| *authorization* | something that proves that you are allowed to access a resource (e.g. Bearer token)
+|===
+
 
 ## Example
 
-Your web application can access a users google calendar if the user consents.
+Imagine *this slide deck* (the client) + 
+wants to *access* (obtain authorization) + 
+*my google calendar* (resource).
 
-https://accounts.google.com/o/oauth2/v2/auth?client_id=879595478666-2h52gee0bmboius1eti2vo0aq9qq3dp5.apps.googleusercontent.com&redirect_uri=http://localhost&response_type=token&scope=https://www.googleapis.com/auth/calendar.readonly[Login]
+[.fragment]
+https://accounts.google.com/o/oauth2/v2/auth?client_id=1010832371207-6lg7vjf685teluei2aalmmudsm7a0m5j.apps.googleusercontent.com&redirect_uri=http://localhost&response_type=token&scope=https://www.googleapis.com/auth/calendar.readonly[Login]
 
 ## Grant types
 
 The steps needed to get the access token are defined in so called *grant types*.
 
-In the workshop we will look at two grant types:
+In this workshop we will look at two grant types:
 
 * Authorization Code
 * Implicit
@@ -69,3 +87,18 @@ In the workshop we will look at two grant types:
   +---------+     +----------+
      (G) Access Token
      
+## Lets start coding
+
+You need
+
+* your laptop (any editor, IDE, ...)
+* internet access + a browser
+* a tool for making HTTP requests (curl, postman, ...)
+* a local webserver serving from port 8080 (`http://locahost:8080`) 
+
+
+## Lets start coding
+
+to start access the following URL in your browser:
+
+https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod
