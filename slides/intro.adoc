@@ -2,6 +2,35 @@
 
 # OAuth 2.0 workshop
 
+## About me
+
+Matthias Kausl
+
+Team lead and Java dev @ willhaben
+
+blog: https://tech.willhaben.at/[tech.willhaben.at]
+
+twitter: @willhabentech
+
+## Motivation
+
+* currently implementing OAuth 2.0 @willhaben
+** not everyone had knowledge about it
+* lots of frameworks that implement OAuth 2.0
+** look "under the hood" to understand it better
+
+## Non Goals
+
+* become an OAuth expert
+* implement your own framework
+
+## Goal
+
+understand how these work
+
+image:login-buttons.png[login]
+
+
 ## Agenda
 
 * Very brief introduction to OAuth/OpenID connect
@@ -86,7 +115,13 @@ In this workshop we will look at two grant types:
   |         |<-G--|          |                                +---------------+
   +---------+     +----------+
      (G) Access Token
-     
+
+## OpenID connect
+
+* adds *authentication* on top of OAuth 2.0
+** remember: OAuth 2.0 is a *authorization framework*
+* removes some ambiguities
+
 ## Lets start coding
 
 You need
