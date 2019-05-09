@@ -1,7 +1,13 @@
 == Task 4 - Verify Token
 
-For the final challenge, you have to verify these tokens. Only one is valid. Revisit the first task
-to get a hint how to verify them.
+For the final challenge, you have to find out which of
+ the tokens below is valid.
+
+You can inspect and verify them using this https://jwt.io/#encoded-jwt[online tool]
+or any other https://jwt.io/[jwt] library.
+
+The authorization provides its public keys
+https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_f5eXsSJfs/.well-known/jwks.json[here].
 
 To win the competition, send the contents of "cognito:username" field to your instructor, you have only
 one guess, so be careful.

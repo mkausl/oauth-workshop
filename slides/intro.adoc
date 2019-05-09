@@ -137,3 +137,77 @@ You need
 to start access the following URL in your browser:
 
 https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod
+
+## Solution 1
+
+.Query Parameters
+|===
+
+|`client_id` | `3can53th3tlmsnhcn1buji30i8`
+
+|`redirect_uri` | `http://localhost:8080/callback`
+
+|`scope` | openid
+
+|`response_type` | token
+
+|===
+
+ https://.../oauth2/authorize
+ ?response_type=token
+ &redirect_uri=http://localhost:8080/callback
+ &scope=openid
+ &client_id=3can53th3tlmsnhcn1buji30i8
+
+
+## Solution 2
+
+### Request 1
+
+.Query Parameters
+|===
+
+|`client_id` | `5vkkniseds4i1s4pst0uoe280u`
+
+|`redirect_uri` | `http://localhost:8080/callback`
+
+|`scope` |  `openid devjourfix.willhaben.test/devjourfix`
+
+|`response_type` | code |
+
+|===
+
+ https://.../login
+ ?response_type=code
+ &redirect_uri=http://localhost:8080/callback
+ &scope=openid+devjourfix.willhaben.test/devjourfix+devjourfix.willhaben.test/final
+ &client_id=5vkkniseds4i1s4pst0uoe280u">
+
+## Solution 2
+
+### Request 2
+
+ POST
+ https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token
+
+ Headers
+ Content-Type: 'application/x-www-form-urlencoded'
+ Authorization: Base64Encode(client_id + ':' + client_secret)
+
+ code=xxxxx
+ grant_type=authorization_code
+ client_id=5vkkniseds4i1s4pst0uoe280u
+ redirect_uri=http://localhost:8080/callback
+
+## Solution 3
+
+ POST
+ https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token
+
+ Headers
+ Content-Type: 'application/x-www-form-urlencoded'
+ Authorization: Base64Encode(client_id + ':' + client_secret)
+
+ refresh_token=xxxxx
+ grant_type=refresh_token
+ client_id=5vkkniseds4i1s4pst0uoe280u
