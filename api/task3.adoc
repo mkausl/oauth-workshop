@@ -1,12 +1,13 @@
 == Task 3 - Refresh token
 
-For this challenge you need to obtain an access token
-by exchanging a *refresh token*.
+In this challenge you need to exchange a
+ *refresh token* for an access token.
 
-The user has already logged in previously to your application using
+A user has previously logged in to your application using
 the *Authorization Code Flow of task 2*.
 
-In your application you find the following entry for the user:
+Your application already contains several tokens
+ of that user:
 
  {
   "id_token": "eyJraWQiOiJXblZwXC8yK0JKMWNJRHhZaHlXc0Q2T3JNUzFNS2hwVFNHZGRcL0tuMXMyVGs9IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiMkhiaG9wRG1wOE55N0I3VTY5REg1QSIsInN1YiI6ImU1ZGZmODRlLTE3ZGUtNGJiNS05MjUwLTdhZmQzZTI2MzhhYyIsImF1ZCI6IjV2a2tuaXNlZHM0aTFzNHBzdDB1b2UyODB1IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE1NTI4Mjc0ODMsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS1jZW50cmFsLTEuYW1hem9uYXdzLmNvbVwvZXUtY2VudHJhbC0xX2Y1ZVhzU0pmcyIsImNvZ25pdG86dXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNTUyODMxMDgzLCJpYXQiOjE1NTI4Mjc0ODN9.RkGAsFU86FaF6MH5F0-rm2EM79YgioidaTsenQcDNDJWCRegR2YFJOLcvMnjQklkf0YfEf0iXF0aV6c96XPSAnkETZe483D5QLssswjG01GPhn2eOIKVXbNUAOK5_R79QoLq3l_4DMu7RQE3IQHykdZajN0rQ9BpWUS_49_AS_1tHJGtD6Zid-m7GOuLt_SZQvGZ8PU-45H4t-rDT-SBXyGKsuBrHKto320qYpuCrgcvxm8cVSKm4CxZMy-Nz4i1vkFOcSrpa4hLYhFjKjSB4u5E-7_jnHS5HDcTeE9q1IjJtXJgL5Zk9eIER4pW2VWtSYWM_bHb4ZpcR-Hk2t56IQ",
@@ -16,10 +17,16 @@ In your application you find the following entry for the user:
   "token_type": "Bearer"
  }
 
-_Hint_: The access_token probably has already expired, you need to https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html[obtain a new one]!
+The *access_token* has already expired,
+you need to obtain a new one.
 
+The HTTP request you have to build is very similar to the one in Task 2.
 
-Fire a HTTP GET to the final endpoint: 
+Consult the authorization server's
+https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html[documentation]!
+
+After you obtained the new *access token*
+fire a HTTP GET to the final endpoint:
 
  https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task4
 

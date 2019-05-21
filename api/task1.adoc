@@ -7,34 +7,30 @@ Authorization Server endpoint:
 
  https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/authorize
 
-Use the endpoint to init a "implicit flow" to obtain the token. You need to add following query parameters:
+Use the endpoint to init a "implicit flow" to obtain an *id token*. You need to add following query parameters:
 
 .Query Parameters
 |===
 
 |`client_id` | `3can53th3tlmsnhcn1buji30i8`
 
-|`redirect_uri` | one of `http://localhost:8080/callback, http://localhost/callback, https://devjourfix.willhaben.test/callback`
+|`redirect_uri` | `http://localhost:8080/callback`
 
-|`scope` | ? |
+|`scope` | ?
 
-|`response_type` | ? |
+|`response_type` | ?
 
 |===
 
 
 Fill in the missing query parameters (?) required by the https://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint[OIDC standard]
-and fire a HTTP GET.
+and fire a HTTP GET (e.g. by simply building a link).
 
-There is a mismatch in one of the parameters between the OIDC standard and our https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html[authorization server], can you spot it?
+There is also documentation available of our https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html[authorization server].
 
 The authorization server will, after the user enters her username and password redirect back to
 the `redirect_uri` with an *Access Key*.
 
-After obtaining the access and identity token, you can inspect them using this https://jwt.io/#encoded-jwt[tool].
-Both tokens should validate with one of the https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_f5eXsSJfs/.well-known/jwks.json[public keys]
- provided by the authorization server.
-
-Use the `id_token` to make a call agains this OIDC protected resource to get your next assignment:
+Use the obtained `id_token` to make a call agains this OIDC protected resource to get your next assignment:
 
  https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2
