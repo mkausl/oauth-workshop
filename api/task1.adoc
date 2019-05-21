@@ -26,8 +26,7 @@ Use the endpoint to init a "implicit flow" to obtain the token. You need to add 
 Fill in the missing query parameters (?) required by the https://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint[OIDC standard]
 and fire a HTTP GET.
 
-There is a mismatch in one of the parameters between the OIDC standard and our https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html[authorization server], can you spot?
-
+There is a mismatch in one of the parameters between the OIDC standard and our https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html[authorization server], can you spot it?
 
 The authorization server will, after the user enters her username and password redirect back to
 the `redirect_uri` with an *Access Key*.

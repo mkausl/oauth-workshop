@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Devjourfix Special</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+</head>
+<body>
+<div class="container">
+    <h2>Task 1</h2>
+    <p>
+    <a href="https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/authorize?response_type=token&redirect_uri=https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/callback-1.html&scope=openid+devjourfix.willhaben.test/bazinga&client_id=3can53th3tlmsnhcn1buji30i8">
+        <button class="btn btn-primary" type="button">
+            Login Task 1
+        </button>
+    </a>
+    </p>
+    <table class="table">
+        <tr>
+            <td>id_token</td>
+            <td><code id="task1"/></td>
+        </tr>
+        <tr>
+            <td>next level</td>
+            <td><code id="result"></code></td>
+        </tr>
+
+    </table>
+    <script>
+
+        var hash = window.location.hash.substr(1);
+
+        var result = hash.split('&').reduce(function (result, item) {
+            var parts = item.split('=');
+            result[parts[0]] = parts[1];
+            return result;
+        }, {});
+        window.document.getElementById('task1').innerText = result.id_token
+
+        window.document.getElementById('result').innerText = "curl --header \"Authorization: Bearer "
+            + result.id_token+"\" https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task1 "
+
+
+    </script>
+</div>
+</body>
+
+</html>
