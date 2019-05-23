@@ -1,15 +1,13 @@
 == Task 2 - Authorization Code Flow
 
-For this task, we use another process to obtain the access and id token:
+For this task, we use another process to obtain the access token:
 https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth[Authorization Code Flow].
 
 We use the same authorization server, but to init the flow we use a different endpoint:
 
-Authorization Server endpoint:
-
  https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/login
 
-However you have to use a different set of parameters:
+For this flow, you have to use a different set of parameters:
 
 .Query Parameters
 |===
@@ -24,13 +22,13 @@ However you have to use a different set of parameters:
 
 |===
 
-Again, fill in the missing query parameters (?) required by the https://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint[OIDC standard]
+Again, fill in the missing query parameters (?) required by the https://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint[standard]
 and build a link.
 
-
 Once you logged in, the server redirects you with a `code` query parameter.
+
 This `code` can be exchanged for an *access token* using
-the https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint[OIDC token endpoint]:
+the https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint[token endpoint]:
 
  https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token
 
@@ -59,12 +57,10 @@ The  `client_secret` needed to build the `Authorization` header is
 
 |===
 
-(Can also be found in
-the https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html[authorization servers documentation]).
+See also: https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html[authorization servers documentation].
 
 
-Using the `access_token` to fire a HTTP GET to
+To complete the task, use the `access_token` to access this resource
 
- https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task3
+ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2
 
-to get to the next task.

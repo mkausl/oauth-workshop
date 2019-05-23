@@ -1,8 +1,11 @@
 :customcss: custom.css
 
-# OAuth 2.0 workshop
+= OAuth 2.0 workshop
 
-## About me
+[border=none]
+image:https://cache.willhaben.at/img/willhaben-style/wh_Logo_RGB.svg[willhaben,400]
+
+== About me
 
 Matthias Kausl
 
@@ -12,135 +15,119 @@ blog: https://tech.willhaben.at/[tech.willhaben.at]
 
 twitter: @willhabentech
 
-## Motivation
+== Motivation
 
 * currently implementing OAuth 2.0 @willhaben
-** not everyone had knowledge about it
+* not everyone had knowledge about it
 * lots of frameworks that implement OAuth 2.0
-** look "under the hood" to understand it better
+* look "under the hood" to understand it better
 
-## Non Goals
-
-* become an OAuth expert
-* implement your own framework
-
-## Goal
+== Goal
 
 understand how these work
 
 image:login-buttons.png[login]
 
 
-## Agenda
+== Agenda
 
-* Very brief introduction to OAuth/OpenID connect
+* Mini talk about OAuth 2.0
 * Coding challenge
 
-## What is OAuth 2.0?
+== What is OAuth 2.0?
 
 OAuth 2.0 is a *authorization framework*
 
-## What is OAuth 2.0?
-
-It defines how a *client* application can + 
+It defines how a *client* application can +
 obtain *authorization* from a *user* + 
-to access a *resource* on her behalf
+to access a *resource* on the users behalf
 
-## Vocabulary
+== Vocabulary
 [cols="1,6"]
 |===
-| *client* | application (e.g. java web applicaiton, angular spa, this slide deck, ...)
-| *resource* | something only the user has access to (e.g. REST API accessing your google calendar)
-| *authorization* | something that proves that you are allowed to access a resource (e.g. Bearer token)
+| *authorization* | give user access to a resource +
+ *What is allowed?*
+| *authentication* | validate that the user is who he claims +
+* Who
+(OAuth 2.0 does not address this)
+|===
+
+see also https://www.okta.com/identity-101/authentication-vs-authorization/[authentication vs authorization]
+
+
+== Vocabulary
+[cols="1,6"]
+|===
+| *client* | any application +
+e.g. desktop or web app (with server backend), single page app (without server), ...
+| *resource* | something the user has access to +
+e.g. REST API accessing your google calendar
+| *access token* 
+| token representing the authorization + 
+issued by the authorization server
 |===
 
 
-## Example
+== Example: access google calendar
 
-Imagine *this slide deck* (the client) + 
-wants to *access* (obtain authorization) + 
+*This slide deck* (the client) +
+wants to access +
 *my google calendar* (resource).
 
-[.fragment]
-https://accounts.google.com/o/oauth2/v2/auth?client_id=1010832371207-6lg7vjf685teluei2aalmmudsm7a0m5j.apps.googleusercontent.com&redirect_uri=http://localhost&response_type=token&scope=https://www.googleapis.com/auth/calendar.readonly[Login]
+It needs to *obtain authorization* from googles *authorization server*.
 
-## Grant types
+OAuth 2.0 defines how to do this.
+
+=== Example
+
+image:sequence-example.png[]
+
+=== Example flow
+[source]
+----
+https://accounts.google.com/o/oauth2/v2/auth // <1>
+?client_id=1010832371207... // <2>
+&redirect_uri=http://url-of-slidedeck.com/... // <3>
+&response_type=token // <4>
+&scope=https://www.googleapis.com/auth/calendar.readonly // <5>
+----
+<1> Authorization server URL
+<2> Client ID specific to the authorization server
+<3> URL the authorization server redirects back to
+<4> Which flow (grant type) to use
+<5> What the client wants to access
+
+=== Example
+
+https://accounts.google.com/o/oauth2/v2/auth?client_id=1010832371207-6lg7vjf685teluei2aalmmudsm7a0m5j.apps.googleusercontent.com&redirect_uri=http://localhost&response_type=token&scope=https://www.googleapis.com/auth/calendar.readonly[Login with google]
+
+== Grant types
 
 The steps needed to get the access token are defined in so called *grant types*.
 
 In this workshop we will look at two grant types:
 
+* Implicit (google calendar example)
 * Authorization Code
-* Implicit
 
-## Authorization Code Grant
 
-     +----------+
-     | Resource |
-     |   Owner  |
-     +----------+
-          ^
-         (B)
-     +----|-----+          Client Identifier      +---------------+
-     |         -+----(A)-- & Redirection URI ---->|               |
-     |  User-   |                                 | Authorization |
-     |  Agent  -+----(B)-- User authenticates --->|     Server    |
-     |          |                                 |               |
-     |         -+----(C)-- Authorization Code ---<|               |
-     +-|----|---+                                 +---------------+
-      (A)  (C)                                        |      |
-       ^    v                                         |      |
-     +---------+                                      |      |
-     |         |>---(D)-- Authorization Code ---------'      |
-     |  Client |          & Redirection URI                  |
-     |         |<---(E)----- Access Token -------------------'
-     +---------+       (w/ Optional Refresh Token)
-
-## Implicit Grant
-
-     
- +----------+     +----------+          Client Identifier     +---------------+
- | Resource |--B->|         -+----(A)-- & Redirection URI --->|               |
- |  Owner   |     |  User-   |                                | Authorization |
- |          |     |  Agent  -|----(B)-- User authenticates -->|     Server    |
- +----------+     |          |                                |               |
-                  |          |<---(C)--- Redirection URI ----<|               |
-                  |          |          with Access Token     +---------------+
-                  |          |            in Fragment
-                  |          |                                +---------------+
-                  |          |----(D)--- Redirection URI ---->|   Web-Hosted  |
-  +---------+     |          |          without Fragment      |     Client    |
-  |         |--A->|          |                                |    Resource   |
-  |  Client |     |     (F)  |<---(E)------- Script ---------<|               |
-  |         |<-G--|          |                                +---------------+
-  +---------+     +----------+
-     (G) Access Token
-
-## OpenID connect
-
-* adds *authentication* on top of OAuth 2.0
-** remember: OAuth 2.0 is a *authorization framework*
-* removes some ambiguities
-
-## Lets start coding
+== Lets start coding
 
 You need
 
 * your laptop (any editor, IDE, ...)
 * internet access + a browser
-* a tool for making HTTP requests (curl, postman, ...)
 * a local webserver serving from port 8080 (`http://locahost:8080`) 
+* a tool for making HTTP requests (curl, postman, ...)
 
 
-## Lets start coding
+== Task 1 - Implicit Flow
 
-to start access the following URL in your browser:
 
-https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod
 
-## Solution 1
+== Solution 1
 
-.Query Parameters
+=== Query Parameters
 |===
 
 |`client_id` | `3can53th3tlmsnhcn1buji30i8`
@@ -153,6 +140,8 @@ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod
 
 |===
 
+=== Request
+
  https://.../oauth2/authorize
  ?response_type=token
  &redirect_uri=http://localhost:8080/callback
@@ -160,11 +149,11 @@ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod
  &client_id=3can53th3tlmsnhcn1buji30i8
 
 
-## Solution 2
+== Solution 2
 
-### Request 1
+=== Query Parameters
 
-.Query Parameters
+
 |===
 
 |`client_id` | `5vkkniseds4i1s4pst0uoe280u`
@@ -177,15 +166,16 @@ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod
 
 |===
 
+=== Request
+
  https://.../login
  ?response_type=code
  &redirect_uri=http://localhost:8080/callback
  &scope=openid+devjourfix.willhaben.test/devjourfix+devjourfix.willhaben.test/final
  &client_id=5vkkniseds4i1s4pst0uoe280u">
 
-## Solution 2
 
-### Request 2
+=== Request 2
 
  POST
  https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token
@@ -199,7 +189,7 @@ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod
  client_id=5vkkniseds4i1s4pst0uoe280u
  redirect_uri=http://localhost:8080/callback
 
-## Solution 3
+== Solution 3
 
  POST
  https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token

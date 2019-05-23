@@ -11,7 +11,7 @@
 <div class="container">
     <h2>Task 1</h2>
     <p>
-    <a href="https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/authorize?response_type=token&redirect_uri=https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/solution/solution-1.html&scope=openid+devjourfix.willhaben.test/bazinga&client_id=3can53th3tlmsnhcn1buji30i8">
+    <a href="https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/authorize?response_type=token&redirect_uri=https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/solution/solution-html/solution-1.html&scope=openid+devjourfix.willhaben.test/bazinga&client_id=3can53th3tlmsnhcn1buji30i8">
         <button class="btn btn-primary" type="button">
             Login Task 1
         </button>
@@ -40,7 +40,7 @@
         window.document.getElementById('task1').innerText = result.id_token
 
         window.document.getElementById('result').innerText = "curl --header \"Authorization: Bearer "
-            + result.id_token+"\" https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2"
+            + result.id_token+"\" https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task1"
 
 
     </script>

@@ -1,13 +1,15 @@
 == Task 1 - Implicit Flow
 
-The first task is to obtain a token from the *authorization server*
-which uses the OpenId Connect protocol, with a process called https://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth[implicit flow].
+The first task is to use the https://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth[implicit flow]
+to access a resource.
 
-Authorization Server endpoint:
+For this example, we use the aws cognito https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html[authorization server].
+
+Authorization Server URL:
 
  https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/authorize
 
-Use the endpoint to init a "implicit flow" to obtain an *id token*. You need to add following query parameters:
+You need to add following query parameters:
 
 .Query Parameters
 |===
@@ -23,14 +25,16 @@ Use the endpoint to init a "implicit flow" to obtain an *id token*. You need to 
 |===
 
 
-Fill in the missing query parameters (?) required by the https://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint[OIDC standard]
-and fire a HTTP GET (e.g. by simply building a link).
+Fill in the missing query parameters (?) required by the https://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint[standard]
+and build a simple html link.
 
-There is also documentation available of our https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html[authorization server].
 
 The authorization server will, after the user enters her username and password redirect back to
-the `redirect_uri` with an *Access Key*.
+the `redirect_uri`.
 
-Use the obtained `id_token` to make a call agains this OIDC protected resource to get your next assignment:
+Extract the `id_token` and use it to access the protected resource:
 
- https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task2
+ https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod/task1
+
+
+
