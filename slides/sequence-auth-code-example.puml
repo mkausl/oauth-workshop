@@ -1,0 +1,16 @@
+@startuml
+actor "user (browser)" as user
+participant "authorization server (google)" as auth
+participant "application (backend)" as app
+participant "client (browser)" as client
+participant "resource (google calendar)" as resource
+
+user -> auth: clicks "login with google"
+auth -> user: login form
+user -> auth: send username + password
+auth -> app: access code
+app -> auth: exchange access code
+auth -> app: access token
+app -> resource: access resource
+
+@enduml

@@ -1,6 +1,6 @@
 == Task 2 - Authorization Code Flow
 
-For this task, we use another process to obtain the access token:
+For this task, we use a different flow to obtain the access token:
 https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth[Authorization Code Flow].
 
 We use the same authorization server, but to init the flow we use a different endpoint:

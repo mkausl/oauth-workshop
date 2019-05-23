@@ -26,70 +26,36 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if 
 <div class="paragraph"><p>It defines how a <strong>client</strong> application can<br>
 obtain <strong>authorization</strong> from a <strong>user</strong><br>
 to access a <strong>resource</strong> on the users behalf</p></div></section>
-<section id="_vocabulary"><h2>Vocabulary</h2><table class="tableblock frame-all grid-all" style="width:100%"><colgroup><col style="width:14.2857%"><col style="width:85.7143%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>authorization</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">give user access to a resource (what is allowed)</p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>authentication</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">validate that the user is who he claims</p></td></tr></table>
+<section id="_vocabulary"><h2>Vocabulary</h2><table class="tableblock frame-all grid-all" style="width:100%"><colgroup><col style="width:14.2857%"><col style="width:85.7143%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>authorization</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">give user access to a resource<br>
+ <strong>What is allowed?</strong></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>authentication</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">validate that the user is who he claims<br>
+* Who
+(OAuth 2.0 does not address this)</p></td></tr></table>
 <div class="paragraph"><p>see also <a href="https://www.okta.com/identity-101/authentication-vs-authorization/">authentication vs authorization</a></p></div></section>
 <section id="_vocabulary_2"><h2>Vocabulary</h2><table class="tableblock frame-all grid-all" style="width:100%"><colgroup><col style="width:14.2857%"><col style="width:85.7143%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>client</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">any application<br>
 e.g. desktop or web app (with server backend), single page app (without server), &#8230;&#8203;</p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resource</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">something the user has access to<br>
-e.g. REST API accessing your google calendar</p></td></tr></table></section>
-<section><section id="_example_access_google_calendar"><h2>Example: access google calendar</h2><div class="paragraph"><p>Imagine <strong>this slide deck</strong> (the client)<br>
+e.g. REST API accessing your google calendar</p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><strong>access token</strong></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">token representing the authorization<br>
+issued by the authorization server</p></td></tr></table></section>
+<section><section id="_example_access_google_calendar"><h2>Example: access google calendar</h2><div class="paragraph"><p><strong>This slide deck</strong> (the client)<br>
 wants to access<br>
-<strong>my google calendar</strong> (resource).</p></div><div class="paragraph"><p>It needs to <strong>obtain authorization</strong> from googles <strong>authorization server</strong>.</p></div><div class="paragraph"><p>OAuth 2.0 defines how to do this.</p></div></section><section id="_example"><h2>Example</h2><div class="paragraph"><p><span class="image"><img src="sequence-example.png" alt="sequence example"></span></p></div></section><section id="_example_2"><h2>Example</h2><pre class="highlight listingblock"><code>https://accounts.google.com/o/oauth2/v2/auth <b>(1)</b>
+<strong>my google calendar</strong> (resource).</p></div><div class="paragraph"><p>It needs to <strong>obtain authorization</strong> from googles <strong>authorization server</strong>.</p></div><div class="paragraph"><p>OAuth 2.0 defines how to do this.</p></div></section><section id="_example"><h2>Example</h2><div class="paragraph"><p><span class="image"><img src="sequence-example.png" alt="sequence example"></span></p></div></section><section id="_example_flow"><h2>Example flow</h2><pre class="highlight listingblock"><code>https://accounts.google.com/o/oauth2/v2/auth <b>(1)</b>
 ?client_id=1010832371207... <b>(2)</b>
 &amp;redirect_uri=http://url-of-slidedeck.com/... <b>(3)</b>
 &amp;response_type=token <b>(4)</b>
 &amp;scope=https://www.googleapis.com/auth/calendar.readonly <b>(5)</b></code></pre>
-<div class="colist arabic"><ol><li><p>Authorization server URL</p></li><li><p>Client ID specific to the authorization server</p></li><li><p>URL the authorization server redirects back to</p></li><li><p>Which flow (grant type) to use</p></li><li><p>What the client wants to access</p></li></ol></div></section><section id="_example_3"><h2>Example</h2><div class="paragraph"><p><a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=1010832371207-6lg7vjf685teluei2aalmmudsm7a0m5j.apps.googleusercontent.com&amp;redirect_uri=http://localhost&amp;response_type=token&amp;scope=https://www.googleapis.com/auth/calendar.readonly">Login with google</a></p></div></section></section>
+<div class="colist arabic"><ol><li><p>Authorization server URL</p></li><li><p>Client ID specific to the authorization server</p></li><li><p>URL the authorization server redirects back to</p></li><li><p>Which flow (grant type) to use</p></li><li><p>What the client wants to access</p></li></ol></div></section><section id="_example_2"><h2>Example</h2><div class="paragraph"><p><a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=1010832371207-6lg7vjf685teluei2aalmmudsm7a0m5j.apps.googleusercontent.com&amp;redirect_uri=http://localhost&amp;response_type=token&amp;scope=https://www.googleapis.com/auth/calendar.readonly">Login with google</a></p></div></section></section>
 <section id="_grant_types"><h2>Grant types</h2><div class="paragraph"><p>The steps needed to get the access token are defined in so called <strong>grant types</strong>.</p></div>
 <div class="paragraph"><p>In this workshop we will look at two grant types:</p></div>
-<div class="ulist"><ul><li><p>Authorization Code</p></li><li><p>Implicit</p></li></ul></div></section>
-<section id="_authorization_code_grant"><h2>Authorization Code Grant</h2><div class="literalblock"><div class="content"><pre>+----------+
-| Resource |
-|   Owner  |
-+----------+
-     ^
-    (B)
-+----|-----+          Client Identifier      +---------------+
-|         -+----(A)-- &amp; Redirection URI ----&gt;|               |
-|  User-   |                                 | Authorization |
-|  Agent  -+----(B)-- User authenticates ---&gt;|     Server    |
-|          |                                 |               |
-|         -+----(C)-- Authorization Code ---&lt;|               |
-+-|----|---+                                 +---------------+
- (A)  (C)                                        |      |
-  ^    v                                         |      |
-+---------+                                      |      |
-|         |&gt;---(D)-- Authorization Code ---------'      |
-|  Client |          &amp; Redirection URI                  |
-|         |&lt;---(E)----- Access Token -------------------'
-+---------+       (w/ Optional Refresh Token)</pre></div></div></section>
-<section id="_implicit_grant"><h2>Implicit Grant</h2><div class="literalblock"><div class="content"><pre>+----------+     +----------+          Client Identifier     +---------------+
-| Resource |--B-&gt;|         -+----(A)-- &amp; Redirection URI ---&gt;|               |
-|  Owner   |     |  User-   |                                | Authorization |
-|          |     |  Agent  -|----(B)-- User authenticates --&gt;|     Server    |
-+----------+     |          |                                |               |
-                 |          |&lt;---(C)--- Redirection URI ----&lt;|               |
-                 |          |          with Access Token     +---------------+
-                 |          |            in Fragment
-                 |          |                                +---------------+
-                 |          |----(D)--- Redirection URI ----&gt;|   Web-Hosted  |
- +---------+     |          |          without Fragment      |     Client    |
- |         |--A-&gt;|          |                                |    Resource   |
- |  Client |     |     (F)  |&lt;---(E)------- Script ---------&lt;|               |
- |         |&lt;-G--|          |                                +---------------+
- +---------+     +----------+
-    (G) Access Token</pre></div></div></section>
-<section id="_openid_connect"><h2>OpenID connect</h2><div class="ulist"><ul><li><p>adds <strong>authentication</strong> on top of OAuth 2.0</p><div class="ulist"><ul><li><p>remember: OAuth 2.0 is a <strong>authorization framework</strong></p></li></ul></div></li><li><p>removes some ambiguities</p></li></ul></div></section>
+<div class="ulist"><ul><li><p>Implicit (google calendar example)</p></li><li><p>Authorization Code</p></li></ul></div></section>
 <section id="_lets_start_coding"><h2>Lets start coding</h2><div class="paragraph"><p>You need</p></div>
-<div class="ulist"><ul><li><p>your laptop (any editor, IDE, &#8230;&#8203;)</p></li><li><p>internet access + a browser</p></li><li><p>a tool for making HTTP requests (curl, postman, &#8230;&#8203;)</p></li><li><p>a local webserver serving from port 8080 (<code><a href="http://locahost:8080" class="bare">http://locahost:8080</a></code>)</p></li></ul></div></section>
-<section id="_lets_start_coding_2"><h2>Lets start coding</h2><div class="paragraph"><p>to start access the following URL in your browser:</p></div>
-<div class="literalblock"><div class="content"><pre>https://bit.ly/2QgV8X4</pre></div></div>
-<div class="paragraph"><p>or</p></div>
-<div class="literalblock"><div class="content"><pre>https://5ddwj6qy0l.execute-api.eu-central-1.amazonaws.com/prod</pre></div></div></section>
+<div class="ulist"><ul><li><p>your laptop (any editor, IDE, &#8230;&#8203;)</p></li><li><p>internet access + a browser</p></li><li><p>a local webserver serving from port 8080 (<code><a href="http://locahost:8080" class="bare">http://locahost:8080</a></code>)</p></li><li><p>a tool for making HTTP requests (curl, postman, &#8230;&#8203;)</p></li></ul></div></section>
+<section id="_task_1_implicit_flow"><h2>Task 1 - Implicit Flow</h2><div class="paragraph"><p><a href="https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task1.html" class="bare">https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task1.html</a></p></div></section>
 <section><section id="_solution_1"><h2>Solution 1</h2></section><section id="_query_parameters"><h2>Query Parameters</h2><table class="tableblock frame-all grid-all" style="width:100%"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>client_id</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>3can53th3tlmsnhcn1buji30i8</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>redirect_uri</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://localhost:8080/callback" class="bare">http://localhost:8080/callback</a></code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>scope</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">openid</p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>response_type</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">token</p></td></tr></table></section><section id="_request"><h2>Request</h2><div class="literalblock"><div class="content"><pre>https://.../oauth2/authorize
 ?response_type=token
 &amp;redirect_uri=http://localhost:8080/callback
 &amp;scope=openid
 &amp;client_id=3can53th3tlmsnhcn1buji30i8</pre></div></div></section></section>
+<section id="_task_2_authorization_code_flow"><h2>Task 2 - Authorization Code Flow</h2><div class="paragraph"><p><span class="image"><img src="sequence-auth-code-example.png" alt="sequence auth code example"></span></p></div>
+<div class="paragraph"><p><a href="https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task2.html" class="bare">https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task2.html</a></p></div></section>
 <section><section id="_solution_2"><h2>Solution 2</h2></section><section id="_query_parameters_2"><h2>Query Parameters</h2><table class="tableblock frame-all grid-all" style="width:100%"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>client_id</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>5vkkniseds4i1s4pst0uoe280u</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>redirect_uri</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://localhost:8080/callback" class="bare">http://localhost:8080/callback</a></code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>scope</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>openid devjourfix.willhaben.test/devjourfix</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>response_type</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td></tr></table></section><section id="_request_2"><h2>Request</h2><div class="literalblock"><div class="content"><pre>https://.../login
 ?response_type=code
 &amp;redirect_uri=http://localhost:8080/callback
@@ -103,6 +69,7 @@ Authorization: Base64Encode(client_id + ':' + client_secret)</pre></div></div>
 grant_type=authorization_code
 client_id=5vkkniseds4i1s4pst0uoe280u
 redirect_uri=http://localhost:8080/callback</pre></div></div></section></section>
+<section id="_task_3_refresh_token"><h2>Task 3 - Refresh token</h2><div class="paragraph"><p><a href="https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task3.html" class="bare">https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task3.html</a></p></div></section>
 <section id="_solution_3"><h2>Solution 3</h2><div class="literalblock"><div class="content"><pre>POST
 https://devjourfix-willhaben-test.auth.eu-central-1.amazoncognito.com/oauth2/token</pre></div></div>
 <div class="literalblock"><div class="content"><pre>Headers
@@ -110,7 +77,8 @@ Content-Type: 'application/x-www-form-urlencoded'
 Authorization: Base64Encode(client_id + ':' + client_secret)</pre></div></div>
 <div class="literalblock"><div class="content"><pre>refresh_token=xxxxx
 grant_type=refresh_token
-client_id=5vkkniseds4i1s4pst0uoe280u</pre></div></div></section></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/head.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+client_id=5vkkniseds4i1s4pst0uoe280u</pre></div></div></section>
+<section id="_task_4_token_validation"><h2>Task 4 - Token validation</h2><div class="paragraph"><p><a href="https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task4.html" class="bare">https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task4.html</a></p></div></section></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/head.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;

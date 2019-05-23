@@ -48,7 +48,7 @@ to access a *resource* on the users behalf
 | *authorization* | give user access to a resource +
  *What is allowed?*
 | *authentication* | validate that the user is who he claims +
-* Who
+ *Who is the user?* +
 (OAuth 2.0 does not address this)
 |===
 
@@ -64,6 +64,14 @@ e.g. desktop or web app (with server backend), single page app (without server),
 e.g. REST API accessing your google calendar
 | *access token* 
 | token representing the authorization + 
+issued by the authorization server
+|===
+
+== Vocabulary
+[cols="1,6"]
+|===
+| *access token*
+| token representing the authorization +
 issued by the authorization server
 |===
 
@@ -123,7 +131,7 @@ You need
 
 == Task 1 - Implicit Flow
 
-
+https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task1.html
 
 == Solution 1
 
@@ -148,6 +156,12 @@ You need
  &scope=openid
  &client_id=3can53th3tlmsnhcn1buji30i8
 
+
+== Task 2 - Authorization Code Flow
+
+image:sequence-auth-code-example.png[]
+
+https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task2.html
 
 == Solution 2
 
@@ -189,6 +203,10 @@ You need
  client_id=5vkkniseds4i1s4pst0uoe280u
  redirect_uri=http://localhost:8080/callback
 
+== Task 3 - Refresh token
+
+https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task3.html
+
 == Solution 3
 
  POST
@@ -201,3 +219,7 @@ You need
  refresh_token=xxxxx
  grant_type=refresh_token
  client_id=5vkkniseds4i1s4pst0uoe280u
+
+== Task 4 - Token validation
+
+https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task4.html
