@@ -62,9 +62,6 @@ see also https://www.okta.com/identity-101/authentication-vs-authorization/[auth
 e.g. desktop or web app (with server backend), single page app (without server), ...
 | *resource* | something the user has access to +
 e.g. REST API accessing your google calendar
-| *access token* 
-| token representing the authorization + 
-issued by the authorization server
 |===
 
 == Vocabulary
@@ -73,6 +70,9 @@ issued by the authorization server
 | *access token*
 | token representing the authorization +
 issued by the authorization server
+| *id token*
+| contains information of the user +
+signed by the authorization server
 |===
 
 
@@ -107,7 +107,15 @@ https://accounts.google.com/o/oauth2/v2/auth // <1>
 
 === Example
 
-https://accounts.google.com/o/oauth2/v2/auth?client_id=1010832371207-6lg7vjf685teluei2aalmmudsm7a0m5j.apps.googleusercontent.com&redirect_uri=http://localhost&response_type=token&scope=https://www.googleapis.com/auth/calendar.readonly[Login with google]
+https://accounts.google.com/o/oauth2/v2/auth?client_id=1010832371207-6lg7vjf685teluei2aalmmudsm7a0m5j.apps.googleusercontent.com&redirect_uri=http://wh-oauth-workshop.s3-website.eu-central-1.amazonaws.com/slides/callback-example.html&response_type=id_token+token&scope=openid+profile+email+https://www.googleapis.com/auth/calendar.readonly&nonce=111111[Login with google]
+
+
+=== Example (ctd.)
+
+* The retrieved *access token* can be used to access the google calendar API
+* the *id token* can be used to identify the user
+
+
 
 == Grant types
 
@@ -127,6 +135,7 @@ You need
 * internet access + a browser
 * a local webserver serving from port 8080 (`http://locahost:8080`) 
 * a tool for making HTTP requests (curl, postman, ...)
+* (optional) clone spring boot boilerplate repo: https://github.com/willhaben/oauth-workshop-java-template
 
 
 == Task 1 - Implicit Flow
@@ -160,6 +169,8 @@ https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task1.html
 == Task 2 - Authorization Code Flow
 
 image:sequence-auth-code-example.png[]
+
+== Task 2 - Authorization Code Flow
 
 https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task2.html
 
