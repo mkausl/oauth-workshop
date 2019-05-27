@@ -1,3 +1,8 @@
 p strong {
   color: #42affa;
 }
+
+.reveal section img {
+  border: none;
+  background-color: transparent;
+}

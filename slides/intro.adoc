@@ -2,8 +2,9 @@
 
 = OAuth 2.0 workshop
 
-[border=none]
-image:https://cache.willhaben.at/img/willhaben-style/wh_Logo_RGB.svg[willhaben,400]
+sponsored by
+
+image:wh_logo.svg[willhaben,400]
 
 == About me
 
@@ -32,7 +33,8 @@ image:login-buttons.png[login]
 == Agenda
 
 * Mini talk about OAuth 2.0
-* Coding challenge
+* Workshop ⌨️
+** pizza 🍕 in between ;-)
 
 == What is OAuth 2.0?
 
@@ -135,10 +137,19 @@ You need
 * internet access + a browser
 * a local webserver serving from port 8080 (`http://locahost:8080`) 
 * a tool for making HTTP requests (curl, postman, ...)
-* (optional) clone spring boot boilerplate repo: https://github.com/willhaben/oauth-workshop-java-template
+
+
+=== Lets start coding
+
+* clone spring boot boilerplate repo: http://bit.ly/wh-oauth-java +
+ https://github.com/willhaben/oauth-workshop-java-template
 
 
 == Task 1 - Implicit Flow
+
+http://bit.ly/wh-oauth-task1
+
+or
 
 https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task1.html
 
@@ -171,6 +182,10 @@ https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task1.html
 image:sequence-auth-code-example.png[]
 
 == Task 2 - Authorization Code Flow
+
+http://bit.ly/wh-oauth-task2
+
+or
 
 https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task2.html
 
@@ -216,6 +231,8 @@ https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task2.html
 
 == Task 3 - Refresh token
 
+http://bit.ly/wh-oauth-task3
+
 https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task3.html
 
 == Solution 3
@@ -233,4 +250,12 @@ https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task3.html
 
 == Task 4 - Token validation
 
+http://bit.ly/wh-oauth-task4
+
 https://s3.eu-central-1.amazonaws.com/wh-oauth-workshop/tasks/task4.html
+
+== Thank you
+
+Solutions and slides:
+
+* https://github.com/willhaben/oauth-workshop
